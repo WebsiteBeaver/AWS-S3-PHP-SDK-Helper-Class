@@ -1,4 +1,4 @@
-This currently works with version 3.19.17 of AWS SDK for PHP. Please let me know or send a pull request if there are changes with the official SDK. I'm more than willing to keep this updated.
+This currently works with version 3.19.17 of AWS SDK for PHP. Please let me know or send a pull request if there are changes with the official SDK that could affect this class. I'm more than willing to keep this updated.
 
 # Documentation #
 
