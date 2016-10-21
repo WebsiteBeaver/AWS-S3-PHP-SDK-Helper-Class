@@ -21,11 +21,12 @@ class S3 {
     if(!$this->client->doesBucketExist($bucket)) 
       throw new Exception('Bucket does not exist.');
   }
-  public function uploadFile($path, $tmpFile, $contentType) {
+  public function uploadFile($path, $tmpFile, $contentType, $allowOverwrite = FALSE) {
     $client = $this->client;
     $bucket = $this->bucket;
-    if($client->doesObjectExist($bucket, $path)) { 
-      echo "File: '$path' already exists. This is to prevent overiding it.";
+    //check if object exists to prevent overwriting, unless specificed in parameter
+    if($client->doesObjectExist($bucket, $path) && !$allowOverwrite) { 
+      echo "File: '$path' already exists. This is to prevent overwriting it.";
       return false;
     }
     //upload file
@@ -166,7 +167,7 @@ class S3 {
       return false;
     }
     if($client->doesObjectExist($bucket, $newName)) {
-      echo nl2br("File: '$newName' already exists. This is to prevent overiding it. \n");
+      echo nl2br("File: '$newName' already exists. This is to prevent overwriting it. \n");
       return false;
     }
     $client->copyObject(array(
