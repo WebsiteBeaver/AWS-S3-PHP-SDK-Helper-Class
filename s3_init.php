@@ -34,6 +34,7 @@ class S3 {
       'Bucket' => $bucket,
       'Key'    => $path, //name in s3
       'Body'   => fopen($tmpFile, 'r+'),
+      'CacheControl' => 'max-age=31536000', //caches file for 1 year
       'ContentType' => $contentType
     ));
     if($client->doesObjectExist($bucket, $path)) return true;
