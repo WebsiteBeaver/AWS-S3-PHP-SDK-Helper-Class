@@ -21,7 +21,7 @@ class S3 {
     if(!$this->client->doesBucketExist($bucket)) 
       throw new Exception('Bucket does not exist.');
   }
-  public function uploadFile($path, $tmpFile, $contentType, $allowOverwrite = FALSE) {
+  public function uploadFile($path, $tmpFile, $contentType, $allowOverwrite = FALSE, $cacheLength = 31536000) {
     $client = $this->client;
     $bucket = $this->bucket;
     //check if object exists to prevent overwriting, unless specificed in parameter
@@ -34,7 +34,7 @@ class S3 {
       'Bucket' => $bucket,
       'Key'    => $path, //name in s3
       'Body'   => fopen($tmpFile, 'r+'),
-      'CacheControl' => 'max-age=31536000', //caches file for 1 year
+      'CacheControl' => "max-age=$cacheLength", //caches file for 1 year by default
       'ContentType' => $contentType
     ));
     if($client->doesObjectExist($bucket, $path)) return true;
