@@ -163,7 +163,7 @@ class S3 {
       echo "File: '$oldName' does not exist";
       return false;
     }
-    if($oldName == $newName) {
+    if($oldName === $newName) {
       echo "New name is same as old name on File: '$oldName'";
       return false;
     }
@@ -188,7 +188,7 @@ class S3 {
     $client = $this->client;
     $bucket = $this->bucket;
     $allFilesRenamedSuccess = true;
-    if($oldName == $newName) {
+    if($oldName === $newName) {
       echo "New name is same as old name on File: '$oldName'";
       return false;
     }
