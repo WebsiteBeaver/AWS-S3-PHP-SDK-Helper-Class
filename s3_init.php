@@ -5,13 +5,13 @@ use Aws\S3\S3Client;
 class S3 {
   private $bucket;
   private $client;
-  public function __construct($bucket, $region) {
+  public function __construct($bucket, $region, $verify = TRUE) {
     $this->bucket = $bucket;
     $this->client = new S3Client([
       'version'   => 'latest',
       'region'    => $region,
       'http'    => [
-          'verify' => false
+          'verify' => $verify
       ],
       'credentials' => [
         'key'       => AWS_KEY,
